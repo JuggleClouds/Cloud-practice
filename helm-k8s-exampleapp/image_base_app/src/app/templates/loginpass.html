@@ -1,0 +1,25 @@
+<!-- extend from base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Sign In</h1>
+{% from "_formhelpers.html" import render_field %}
+  <form action="" method="post" name="login">
+      <dl>
+          {{ render_field(form.nickname) }}<br>
+          {{ render_field(form.password) }}<br>
+      </dl>
+      <div class="control-group">
+              <div class="controls">
+                  <label class="checkbox" for="remember_me">
+                      {{ form.remember_me }} {{ _('Remember Me') }}
+                  </label>
+              </div>
+      </div>
+      <div class="control-group">
+              <div class="controls">
+                  <input class="btn btn-primary" type="submit" value="{{ _('Sign In') }}">
+              </div>
+      </div>
+  </form>
+{% endblock %}

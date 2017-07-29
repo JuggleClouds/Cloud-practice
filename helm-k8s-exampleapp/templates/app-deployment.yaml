@@ -1,0 +1,53 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "fullname" . }}
+  labels:
+    heritage: {{.Release.Service | quote }}
+    release: {{.Release.Name | quote }}
+    chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+    app: {{ template "fullname" . }}
+spec:
+  replicas: {{default 1 .Values.app.Replicas}}
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        heritage: {{.Release.Service | quote }}
+        release: {{.Release.Name | quote }}
+        chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+        app: {{ template "fullname" . }}
+    spec:
+      containers:
+        - name: {{ template "fullname" . }}
+          image: "{{.Values.app.Image}}:{{.Values.app.ImageTag}}"
+          imagePullPolicy: "{{.Values.app.ImagePullPolicy}}"
+          args: ["uwsgi.sh"]
+          livenessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 30
+            timeoutSeconds: 5
+          readinessProbe:
+            tcpSocket:
+              port: 8080
+            initialDelaySeconds: 5
+            timeoutSeconds: 3
+          ports:
+            - containerPort: {{.Values.app.ContainerPort}}
+              #name: http
+          resources:
+            requests:
+              cpu: "{{.Values.app.Cpu}}"
+              memory: "{{.Values.app.Memory}}"
+          volumeMounts:
+            -
+              mountPath: /home/httpd/app/src/config.py
+              subPath: config.py
+              name: app-config
+              readOnly: false
+      volumes:
+      - name: app-config
+        configMap:
+          name: {{ template "fullname" . }}

@@ -1,0 +1,64 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {{ template "postgresql.fullname" . }}
+  labels:
+    heritage: {{.Release.Service | quote }}
+    release: {{.Release.Name | quote }}
+    chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+    app: {{ template "postgresql.fullname" . }}
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        heritage: {{.Release.Service | quote }}
+        release: {{.Release.Name | quote }}
+        chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+        app: {{ template "postgresql.fullname" . }}
+    spec:
+      containers:
+        - name: {{ template "postgresql.fullname" . }}
+          image: "{{.Values.db.ImageDb}}:{{.Values.db.ImageTagDb}}"
+          imagePullPolicy: "{{.Values.db.ImagePullPolicy}}"
+          env:
+            - name: POSTGRES_DB
+              value: "{{.Values.db.db_name}}"
+            - name: POSTGRES_PASSWORD
+              value: "{{.Values.db.db_pass}}"
+            - name: POSTGRES_USER
+              value: "{{.Values.db.db_user}}"
+          ports:
+            - containerPort: {{.Values.db.db_port}}
+              name: db
+          livenessProbe:
+            exec:
+              command:
+              - pg_isready
+            initialDelaySeconds: 60
+            timeoutSeconds: 3
+          readinessProbe:
+            exec:
+              command:
+              - pg_isready
+            initialDelaySeconds: 60
+            timeoutSeconds: 3
+          resources:
+            requests:
+              cpu: "{{.Values.db.Cpu}}"
+              memory: "{{.Values.db.Memory}}"
+          volumeMounts:
+            -
+              mountPath: "{{.Values.db.db_path}}"
+              name: postgresql-config
+              readOnly: false
+      volumes:
+      - name: postgresql-config
+      {{- if .Values.db.Persistence.Enabled }}
+        persistentVolumeClaim:
+          claimName: {{ template "fullname" . }}
+      {{- else }}
+        emptyDir: {}
+      {{- end -}}

@@ -1,0 +1,4 @@
+apiVersion: v1
+description: A Helm chart for Kubernetes
+name: helm-k8s-exampleapp
+version: 0.1.0

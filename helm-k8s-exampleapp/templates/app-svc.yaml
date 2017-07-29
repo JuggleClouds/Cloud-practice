@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{template "fullname" . }}
+  labels:
+    heritage: {{.Release.Service | quote }}
+    release: {{.Release.Name | quote }}
+    chart: "{{.Chart.Name}}-{{.Chart.Version}}"
+    app: {{ template "fullname" . }}
+spec:
+  ports:
+    - port: {{.Values.app.ServicePort}}
+      #name: http
+      targetPort: {{.Values.app.ContainerPort}}
+      {{if (and (eq .Values.app.ServiceType "NodePort") (not (empty .Values.app.NodePort)))}}
+      nodePort: {{.Values.app.NodePort}}
+      {{end}}
+  {{- if .Values.app.externalIPs }}
+  externalIPs:  [{{.Values.app.externalIPs}}]
+  {{- end }}
+  selector:
+    app: {{ template "fullname" . }}
+  type: {{.Values.app.ServiceType}}
+  {{if eq .Values.app.ServiceType "LoadBalancer"}}
+  loadBalancerSourceRanges: {{.Values.app.LoadBalancerSourceRanges}}
+  {{end}}

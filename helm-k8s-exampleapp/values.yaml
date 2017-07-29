@@ -1,0 +1,63 @@
+# Default values for ExampleApp.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+# name: value
+
+app:
+  Memory: "200Mi"
+  Cpu: "100m"
+  Name: example-app
+  Image: "registry.wdo.io/k8swar/exampleapp"
+  ImageTag: "0.1.0"
+  ImagePullPolicy: "Always"
+  Replicas: 1
+
+  # DB parameter
+  db_user: 'postgres'
+  db_pass: 'postgres'
+  db_name: 'blog'
+  db_port: '5432'
+
+  # Exposes parameter
+  ServicePort: 81
+  ContainerPort: 81
+# NodePort: <to set explicitly, choose port between 30000-32767
+  NodePort: 30055
+  # externalIPs: "10.10.10.10"
+  ServiceType: NodePort
+#  If ServiceType need specify parameter LoadBalancerSourceRanges
+#  LoadBalancerSourceRanges:
+#  - 10.144.192.0/20
+# Used to create Ingress record (should used with ServiceType: ClusterIP)
+  # HostName: k8s-example.iv
+  Ingress:
+    # Annotations:
+      # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+
+    # TLS:
+      # - secretName: jenkins.cluster.local
+      #   hosts:
+      #     - exampleapp.cluster.local
+
+db:
+  Cpu: "200m"
+  Memory: "512Mi"
+  Name: example-db
+  ImageDb: "registry.wdo.io/k8swar/exampledb"
+  ImageTagDb: "0.1.0"
+  ImagePullPolicy: "Always"
+  ServicePort: 5432
+  # DB parameter
+  db_user: 'postgres'
+  db_name: 'blog'
+  db_pass: 'postgres'
+  db_port: '5432'
+  db_path: '/var/lib/postgresql/data/'
+  # Disk parameter
+  Persistence:
+     Enabled: false
+     AccessMode: ReadWriteMany
+     Size: 2Gi
+     nfspath: /opt/nfs/exampleapp
+     nfsserver: 10.10.10.10

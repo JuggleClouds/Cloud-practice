@@ -1,0 +1,7 @@
+src/db_repository
+src/search.db
+src/flask
+src/tmp/nonces
+*.pyo
+*.pyc
+*.mo

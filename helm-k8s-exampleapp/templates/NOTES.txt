@@ -1,0 +1,15 @@
+{{- if .Values.app.HostName }}
+Visit http://{{ .Values.app.HostName }}
+{{- end }}
+
+{{- if .Values.app.externalIPs }}
+Visit http://{{ .Values.app.externalIPs }}
+{{- end }}
+
+{{ if .Values.db.Persistence.Enabled }}
+{{- else }}
+#################################################################################
+######   WARNING: Persistence is disabled!!! You will lose your data when   #####
+######            the exampleapp postgresql pod is terminated.              #####
+#################################################################################
+{{- end }}
