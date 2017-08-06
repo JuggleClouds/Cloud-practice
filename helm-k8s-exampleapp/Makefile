@@ -7,7 +7,7 @@ VERSIONAPP = helm-k8s-exampleapp-0.1.0
 NAMECHART = example-blog
 NAMEDB = juggleclouds/cloudpractice
 VERSIONDB = helm-k8s-exampledb-0.1.0
-NAMESPACE = exampleapp
+NAMESPACE = helm-k8s-exampleapp
 
 .PHONY: upgrade prep build build_app build_db push run status clean dry-run purge
 

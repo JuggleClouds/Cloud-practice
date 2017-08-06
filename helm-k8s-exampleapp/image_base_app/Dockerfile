@@ -5,12 +5,13 @@ ENV home /home/httpd
 ENV user httpd
 
 # Training home directory
-RUN sh -c 'mkdir -pv $home/{conf,logs,bin,app,run}'  && \
+RUN sh -c 'mkdir -pv $home/conf/; mkdir -pv $home/logs; mkdir -pv $home/bin; mkdir -pv $home/app; mkdir -pv $home/run' && \
+    echo > $home/logs/nginx_access.log && echo >  $home/logs/nginx_error.log && \
     adduser -D -h $home $user
 
 # Instaling packages
 RUN apk update && apk add --no-cache libpq tini uwsgi uwsgi-python openssl-dev openssl libffi-dev libffi sudo bash nginx \
-    gcc python-dev postgresql-dev postgresql-libs py-lxml postgresql-client build-base 
+    gcc python-dev postgresql-dev postgresql-libs py-lxml postgresql-client build-base
 
 # set workdir for copy
 WORKDIR $home

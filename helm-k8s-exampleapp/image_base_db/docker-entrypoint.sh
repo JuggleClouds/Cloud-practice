@@ -1,5 +1,6 @@
 #!/bin/sh
 chown -R postgres "$PGDATA"
+chown -R postgres /run/postgresql/
 
 if [ -z "$(ls -A "$PGDATA")" ]; then
     gosu postgres initdb
