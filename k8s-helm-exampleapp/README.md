@@ -1,7 +1,7 @@
-# Helm Chart ExampleApp
+## Example of deploying an application (app and database) using Helm in a cluster Kubernetes.
 
-Данное приложение предназначено для практического освоения kubernetes и helm.
----
+      This application is intended for the practical mastering of kubernetes and helm.
+  ---
 ### Приложение состоит из двух микросервисов:
 
 - Сервис написанный на python простои блог, реализован для демонстрации работы с базой данных, работает через uwsgi.

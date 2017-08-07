@@ -3,7 +3,6 @@
 # negation (prefixed with !). Only one pattern per line.
 .DS_Store
 # Common VCS dirs
-exampletraefik
 image_base_app/
 image_base_db/
 .git/
