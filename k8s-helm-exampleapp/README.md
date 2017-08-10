@@ -9,7 +9,7 @@
 - Database postgresql for data storage, this application uses the scheme of working with nfs disk.
 
 **Micro services interconnection scheme**:
-<img src="https://github.com/JuggleClouds/Cloud-practice/raw/master/k8s-helm-exampleapp/shema micro service.pn">
+<img src="https://github.com/JuggleClouds/Cloud-practice/raw/master/k8s-helm-exampleapp/shema micro service.png">
 ---
 
 ### Что такое Helm ?
