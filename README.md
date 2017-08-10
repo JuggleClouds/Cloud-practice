@@ -6,4 +6,4 @@ These examples will be for practice with Kubernetes.
 
 |Name | Description | Notable Features Used | Complexity Level|
 ------------- | ------------- | ------------ | ------------ |
-|[Blog exampleapp](k8s-helm-exampleapp/) |  App python with postgresql database| Helm, Persistent Volume with Claim, Service | Intermediate
+|[Blog exampleapp](k8s-helm-exampleapp/) |  App Flask-python with postgresql database| Helm, Persistent Volume with Claim, Service | Intermediate
