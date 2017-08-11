@@ -11,12 +11,11 @@ What would you understand that there is no need for additional magic, for the im
 2. Database postgresql for data storage, this application uses the scheme of working with nfs disk - on deployed on your local machine or remotely. I took the implementation of creating an docker image for the database here [docker-alpine-postgres](https://github.com/kiasaki/docker-alpine-postgres).
 In this project, everything is simple and intuitive, one script ***docker-entrypoint.sh*** that initializes the database at startup
 
-**Micro services interconnection** 
-
+**Micro services interconnection**
 
 <img src="https://github.com/JuggleClouds/Cloud-practice/raw/master/k8s-helm-exampleapp/shema micro service.png">
 When a request comes from the client, it gets into the application service, applications can be located on any of the physical nodes, if suddenly the server or application to fall down, the application automatically self-settles on the other server through the cluster. The same thing happens with the database, plus the database has its own permanent store remain in the same state.
-
+<br>
 **Basic objects of Kubernetes which are used in this application**:
 
 * [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) to
@@ -30,6 +29,7 @@ When a request comes from the client, it gets into the application service, appl
 * [Secrets](http://kubernetes.io/docs/user-guide/secrets/) to store sensitive
   passwords.
 ---
+<br>
 > `The application will be deployed to the kubernetes using a helm so that i make a small intro to helm.`
 
 ### What is  Helm ?
@@ -47,7 +47,6 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
 
 #### Preparation of the necessary environment for their work stations
 </br>
-
 1. First you need to download and install minikube on your machine, just click on the link  [minikube ](https://github.com/kubernetes/minikube/releases), there are versions for all operating systems and commands for installation. Install a virtual environment in your OS, minikube requires:
 
   * OS X
@@ -74,11 +73,9 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
 
 8. Go to directory ``./k8s-helm-exampleapp``, in file ``values.yaml`` In the section ``app`` change parameter ''externalIPs'' on ip address which displays the command ``minikube ip``. Now if it is necessary that the database had a real and nfs disk and the data was stored on it, you first need to raise the nfs drive example instruction how to do it on OS centos here [nfsdisk-gaid](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-centos-6), in file ``values.yaml``  in section  ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``true`` and change parameters ``nfspath`` and ``nfsserver`` on their. If database does not need a persistent disk then in the section ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``fasle``.
 </br>
-</br>
 
 #### Install the application using make and helm
 </br>
-
 1. Install the application - go to directory ``./k8s-helm-exampleapp`` , run the command ``make run``. All variables and commands for assembling and operating the project are described in **Makefile**, a description of the commands can be viewed by running the command ``make help`` .
 
 4. Check ``make status`` or ``kubectl get all -n exampleapp``.
