@@ -16,6 +16,7 @@ In this project, everything is simple and intuitive, one script ***docker-entryp
 <img src="https://github.com/JuggleClouds/Cloud-practice/raw/master/k8s-helm-exampleapp/shema micro service.png">
 When a request comes from the client, it gets into the application service, applications can be located on any of the physical nodes, if suddenly the server or application to fall down, the application automatically self-settles on the other server through the cluster. The same thing happens with the database, plus the database has its own permanent store remain in the same state.
 <br>
+
 **Basic objects of Kubernetes which are used in this application**:
 
 * [Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) to
@@ -30,6 +31,7 @@ When a request comes from the client, it gets into the application service, appl
   passwords.
 ---
 <br>
+
 > `The application will be deployed to the kubernetes using a helm so that i make a small intro to helm.`
 
 ### What is  Helm ?
@@ -47,6 +49,7 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
 
 #### Preparation of the necessary environment for their work stations
 </br>
+
 1. First you need to download and install minikube on your machine, just click on the link  [minikube ](https://github.com/kubernetes/minikube/releases), there are versions for all operating systems and commands for installation. Install a virtual environment in your OS, minikube requires:
 
   * OS X
@@ -76,6 +79,7 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
 
 #### Install the application using make and helm
 </br>
+
 1. Install the application - go to directory ``./k8s-helm-exampleapp`` , run the command ``make run``. All variables and commands for assembling and operating the project are described in **Makefile**, a description of the commands can be viewed by running the command ``make help`` .
 
 4. Check ``make status`` or ``kubectl get all -n exampleapp``.
