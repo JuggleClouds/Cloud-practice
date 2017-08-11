@@ -43,20 +43,20 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
   - The server part (tiller) consists of deployed in the kubernetes, the server part is installed simply by command ``helm init``, one thing you need to perform this command only when you have a cluster installed.
 ---
 ### Deploy micro blog
-<br>
+</br>
 
 #### Preparation of the necessary environment for their work stations
-<br>
+</br>
 1. First you need to download and install minikube on your machine, just click on the link  [minikube ](https://github.com/kubernetes/minikube/releases), there are versions for all operating systems and commands for installation. Install a virtual environment in your OS, minikube requires:
-* OS X
-  - xhyve driver, VirtualBox or VMware Fusion installation
-* Linux
-  - VirtualBox or KVM installation,
-* Windows
-  - Hyper-V
-* VT-x/AMD-v virtualization must be enabled in BIOS
+  * OS X
+    - xhyve driver, VirtualBox or VMware Fusion installation
+  * Linux
+    - VirtualBox or KVM installation,
+  * Windows
+    - Hyper-V
+  * VT-x/AMD-v virtualization must be enabled in BIOS
 
- > If there are problems with installing the virtual environment in the OS, you need to disable the secure boot in the BIOS (UEFI) or generate the keys for the secure boot.
+   > If there are problems with installing the virtual environment in the OS, you need to disable the secure boot in the BIOS (UEFI) or generate the keys for the secure boot.
 
 2. Run the minikube command from the console ``minikube start``, minikube create a virtual machine and run it kubernetes, it will add everything you need credentials to access the cluster kubernetes to a file ``~/.kube/config``.
 
@@ -71,11 +71,11 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
 7. Copy the application itself [microblog](https://github.com/JuggleClouds/Cloud-practice/tree/master/k8s-helm-exampleapp).
 
 8. Go to directory ``./k8s-helm-exampleapp``, in file ``values.yaml`` In the section ``app`` change parameter ''externalIPs'' on ip address which displays the command ``minikube ip``. Now if it is necessary that the database had a real and nfs disk and the data was stored on it, you first need to raise the nfs drive example instruction how to do it on OS centos here [nfsdisk-gaid](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-centos-6), in file ``values.yaml``  in section  ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``true`` and change parameters ``nfspath`` and ``nfsserver`` on their. If database does not need a persistent disk then in the section ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``fasle``.
-<br>
-<br>
+</br>
+</br>
 
 #### Install the application using make and helm
-<br>
+</br>
 
 1. Install the application - go to directory ``./k8s-helm-exampleapp`` , run the command ``make run``. All variables and commands for assembling and operating the project are described in **Makefile**, a description of the commands can be viewed by running the command ``make help`` .
 
