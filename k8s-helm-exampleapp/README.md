@@ -44,6 +44,7 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
 ---
 ### Deploy micro blog
 <br>
+
 #### Preparation of the necessary environment for their work stations
 <br>
 1. First you need to download and install minikube on your machine, just click on the link  [minikube ](https://github.com/kubernetes/minikube/releases), there are versions for all operating systems and commands for installation. Install a virtual environment in your OS, minikube requires
@@ -70,7 +71,6 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
 7. Copy the application itself [microblog](https://github.com/JuggleClouds/Cloud-practice/tree/master/k8s-helm-exampleapp).
 
 8. Go to directory ``./k8s-helm-exampleapp``, in file ``values.yaml`` In the section ``app`` change parameter ''externalIPs'' on ip address which displays the command ``minikube ip``. Now if it is necessary that the database had a real and nfs disk and the data was stored on it, you first need to raise the nfs drive example instruction how to do it on OS centos here [nfsdisk-gaid](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-centos-6), in file ``values.yaml``  in section  ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``true`` and change parameters ``nfspath`` and ``nfsserver`` on their. If database does not need a persistent disk then in the section ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``fasle``.
-<br>
 <br>
 <br>
 
