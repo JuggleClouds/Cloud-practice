@@ -11,7 +11,7 @@ What would you understand that there is no need for additional magic, for the im
 2. Database postgresql for data storage, this application uses the scheme of working with nfs disk - on deployed on your local machine or remotely. I took the implementation of creating an docker image for the database here [docker-alpine-postgres](https://github.com/kiasaki/docker-alpine-postgres).
 In this project, everything is simple and intuitive, one script ***docker-entrypoint.sh*** that initializes the database at startup
 
-**Micro services interconnection **:
+**Micro services interconnection** 
 
 
 <img src="https://github.com/JuggleClouds/Cloud-practice/raw/master/k8s-helm-exampleapp/shema micro service.png">
