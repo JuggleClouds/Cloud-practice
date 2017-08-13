@@ -11,34 +11,16 @@ app:
   ImageTag: "0.1.0"
   ImagePullPolicy: "Always"
   Replicas: 1
-
-  # DB parameter
-  db_user: 'postgres'
-  db_pass: 'postgres'
-  db_name: 'blog'
-  db_port: '5432'
-
-  # Exposes parameter
+# Exposes parameter
   ServicePort: 80
   ContainerPort: 8080
-# NodePort: <to set explicitly, choose port between 30000-32767
+  # NodePort: <to set explicitly, choose port between 30000-32767
   NodePort: 30055
   externalIPs: "192.168.99.100"
   ServiceType: NodePort
 #  If ServiceType need specify parameter LoadBalancerSourceRanges
 #  LoadBalancerSourceRanges:
 #  - 10.144.192.0/20
-# Used to create Ingress record (should used with ServiceType: ClusterIP)
-  # HostName: k8s-example.iv
-  Ingress:
-    # Annotations:
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
-
-    # TLS:
-      # - secretName: jenkins.cluster.local
-      #   hosts:
-      #     - exampleapp.cluster.local
 
 db:
   Cpu: "200m"
@@ -48,13 +30,13 @@ db:
   ImageTagDb: "0.1.0"
   ImagePullPolicy: "Always"
   ServicePort: 5432
-  # DB parameter
+# DB parameter
   db_user: 'postgres'
   db_name: 'blog'
   db_pass: 'postgres'
   db_port: '5432'
   db_path: '/var/lib/postgresql/data/'
-  # Disk parameter
+# Disk parameter
   Persistence:
      Enabled: false
      AccessMode: ReadWriteMany

@@ -23,6 +23,19 @@ spec:
         - name: {{ template "fullname" . }}
           image: "{{.Values.app.Image}}:{{.Values.app.ImageTag}}"
           imagePullPolicy: "{{.Values.app.ImagePullPolicy}}"
+          env:
+          - name: POSTGRES_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "fullname" . }}
+                key: postgresql-user
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "fullname" . }}
+                key: postgresql-pass
+          - name: DATABASE_URL
+            value: postgresql://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@{{ template "postgresql.fullname" . }}:{{ .Values.db.db_port}}/{{ .Values.db.db_name}}
           args: ["uwsgi.sh"]
           livenessProbe:
             tcpSocket:

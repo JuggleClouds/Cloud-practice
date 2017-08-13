@@ -6,7 +6,6 @@ ENV user httpd
 
 # Training home directory
 RUN sh -c 'mkdir -pv $home/conf/; mkdir -pv $home/logs; mkdir -pv $home/bin; mkdir -pv $home/app; mkdir -pv $home/run' && \
-    echo > $home/logs/nginx_access.log && echo >  $home/logs/nginx_error.log && \
     adduser -D -h $home $user
 
 # Instaling packages

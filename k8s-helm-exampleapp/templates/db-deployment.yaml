@@ -26,10 +26,16 @@ spec:
           env:
             - name: POSTGRES_DB
               value: "{{.Values.db.db_name}}"
-            - name: POSTGRES_PASSWORD
-              value: "{{.Values.db.db_pass}}"
             - name: POSTGRES_USER
-              value: "{{.Values.db.db_user}}"
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: postgresql-user
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ template "fullname" . }}
+                  key: postgresql-pass
           ports:
             - containerPort: {{.Values.db.db_port}}
               name: db

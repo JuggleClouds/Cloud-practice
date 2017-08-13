@@ -20,24 +20,7 @@ data:
        # {'name': 'MyOpenID', 'url': 'https://www.myopenid.com'}
        ]
 
-    if os.environ.get('DATABASE_URL') is None:
-       # DB Vars
-       db_user = {{ .Values.app.db_user | quote }}
-       db_pass = {{ .Values.app.db_pass | quote }}
-       db_host = "{{ template "postgresql.fullname" . }}"
-       db_name = {{ .Values.app.db_name | quote }}
-       db_port = {{ .Values.app.db_port | quote}}
-       # DB Settings
-       SQLALCHEMY_TRACK_MODIFICATIONS = True
-       SQLALCHEMY_DATABASE_URI = 'postgresql://{db_user}:{db_pass}@{db_host}:{db_port}/{db_name}'.format(
-       db_user=db_user,
-       db_pass=db_pass,
-       db_host=db_host,
-       db_name=db_name,
-       db_port=db_port
-       )
-    else:
-      SQLALCHEMY_DATABASE_URI = os.environ['DATABASE_URL']
+    SQLALCHEMY_DATABASE_URI = '{}'.format(os.environ['DATABASE_URL'])
     SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
     SQLALCHEMY_RECORD_QUERIES = True
     WHOOSH_BASE = os.path.join(basedir, 'search.db')
