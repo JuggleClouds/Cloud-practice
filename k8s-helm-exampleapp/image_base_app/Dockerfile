@@ -18,8 +18,6 @@ WORKDIR $home
 
 # Copy app, configs and necessary scripts
 COPY ./src/ $home/app/src/
-COPY ./nginx/nginx.conf /etc/nginx/
-COPY ./nginx/exampleapp.conf /etc/nginx/conf.d/
 COPY ./templates/ ./
 COPY ./bin/ /usr/bin/
 
