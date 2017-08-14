@@ -44,10 +44,8 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
   - To install the client part of the helm on its workstation, just download the bin file for your system from [GitRepoHelm](https://github.com/kubernetes/helm), give this file the right to write a ``chmod u+x helm`` and put the helm (bin file) in you ``PATH:`` to the application folder ex.. ``/usr/local/bin``. You can get acquainted with the full instruction on installation here [install helm](https://docs.helm.sh/using_helm/#installing-helm).
   - The server part (tiller) consists of deployed in the kubernetes, the server part is installed simply by command ``helm init``, one thing you need to perform this command only when you have a cluster installed.
 ---
-### Deploy micro blog
-</br>
 
-#### Preparation of the necessary environment for their work stations
+### Preparation of the necessary environment for their work stations
 </br>
 
 1. First you need to download and install minikube on your machine, just click on the link  [minikube ](https://github.com/kubernetes/minikube/releases), there are versions for all operating systems and commands for installation. Install a virtual environment in your OS, minikube requires:
@@ -74,10 +72,35 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
 
 7. Copy the application itself [microblog](https://github.com/JuggleClouds/Cloud-practice/tree/master/k8s-helm-exampleapp).
 
-8. Go to directory ``./k8s-helm-exampleapp``, in file ``values.yaml`` In the section ``app`` change parameter ''externalIPs'' on ip address which displays the command ``minikube ip``. Now if it is necessary that the database had a real and nfs disk and the data was stored on it, you first need to raise the nfs drive example instruction how to do it on OS centos here [nfsdisk-gaid](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-centos-6), in file ``values.yaml``  in section  ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``true`` and change parameters ``nfspath`` and ``nfsserver`` on their. If database does not need a persistent disk then in the section ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``fasle``.
+8. Go to directory ``./k8s-helm-exampleapp``, in file ``values.yaml`` In the section ``app`` change parameter ''externalIPs'' on ip address which displays the command ``minikube ip``.
+
+ > :warning: The type of persistent volume on the minikube is only available **hostPath**. This step is optional, it is intended only for clusters kubernetes that are not deployed with the help of minikube, to connect the nfs disk with data storage for the database. Here we will configure nfs for centos, but it will not be difficult for other operating systems to find instructions on the Internet
+
+ * Now if it is necessary that the database had a real and nfs disk and the data was stored on it, you first need to raise the nfs drive:
+    1. The system should be set up as root. You can access the root user by typing ```sudo su```<p>
+    2. Step One—Download the Required Software ``` yum install nfs-utils nfs-utils-lib ```<p>
+    3. Subsequently, run several startup scripts for the NFS server:<p> ```chkconfig nfs on``` or ```systemctl enable nfs```   
+    ```service rpcbind start``` or ```systemctl status  rpcbind```  
+    ```service nfs start``` or ```systemctl start nfs```
+    4. The next step is to decide which directory we want to share with the client server. The chosen directory should then be added to the /etc/exports file, which specifies both the directory to be shared and the details of how it is shared.<p>
+    Suppose we wanted to share the directory, **/opt/exampleapp**  
+    Creating this directory ```sudo mkdir -p  /opt/exampleapp```
+    5. We need to export the directory:  
+    ```vi /etc/exports```  
+    Add the following lines to the bottom of the file, sharing the directory with the client:  
+    ```/mnt/exampleapp  *(rw,sync)``` or ```/mnt/exampleapp  "ip you nfs server"(rw,sync)```  
+    These settings accomplish several tasks:
+      * To get the client node address, you need to run the command, In the result we get the following addresses ```192.168.99.100```
+      * ``rw``: This option allows the client server to both read and write within the shared directory
+      * ``sync``: Sync confirms requests to the shared directory only once the changes have been committed.
+      * ``no_subtree_check``: This option prevents the subtree checking. When a shared directory is the subdirectory of a larger filesystem, nfs performs scans of every directory above it, in order to verify its permissions and details. Disabling the subtree check may increase the reliability of NFS, but reduce security.
+      * ``no_root_squash``: This phrase allows root to connect to the designated directory   
+      > All the parameters for the NFS can be seen here [nfs options](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Deployment_Guide/s1-nfs-server-config-exports.html)
+      * Once you have entered in the settings for each directory, run the following command to export them: ```exportfs -a```<p>  
+ * In file ``values.yaml``  in section  ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``true``. You need to comment out the parameters ```type: hostpath```, ```path: "/tmp/data/pv-1"``` Uncomment settings ```type: nfs``` and change parameters **nfspath: /opt/exampleapp** and **nfsserver: "ip you nfs server"**  on their. If database does not need a persistent disk then in the section ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``false``.
 </br>
 
-#### Install the application using make and helm
+### Deploy micro blog using make and helm
 </br>
 
 1. Install the application - go to directory ``./k8s-helm-exampleapp`` , run the command ``make run``. All variables and commands for assembling and operating the project are described in **Makefile**, a description of the commands can be viewed by running the command ``make help`` .

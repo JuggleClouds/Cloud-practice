@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: nfsdb-{{ template "fullname" . }}
+  name: {{ template "fullname" . }}
   labels:
     app: {{ template "fullname" . }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
@@ -11,6 +11,12 @@ metadata:
 spec:
   capacity:
     storage: {{ .Values.db.Persistence.Size | quote }}
+  {{if eq .Values.db.Persistence.type "hostpath"}}
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: {{ .Values.db.Persistence.path }}
+  {{else if eq .Values.db.Persistence.type "nfs"}}
   accessModes:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
@@ -18,6 +24,7 @@ spec:
     path: {{ .Values.db.Persistence.nfspath }}
     server: {{ .Values.db.Persistence.nfsserver }}
     readOnly: false
+  {{end}}
 ---
 kind: PersistentVolumeClaim
 apiVersion: v1
@@ -30,7 +37,7 @@ metadata:
     heritage: "{{ .Release.Service }}"
 spec:
   accessModes:
-    - {{ .Values.db.Persistence.AccessMode | quote }}
+    - {{ .Values.db.Persistence.AccessMode }}
   resources:
     requests:
       storage: {{ .Values.db.Persistence.Size | quote }}

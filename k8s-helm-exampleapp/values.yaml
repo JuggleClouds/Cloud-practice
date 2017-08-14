@@ -38,8 +38,11 @@ db:
   db_path: '/var/lib/postgresql/data/'
 # Disk parameter
   Persistence:
-     Enabled: false
-     AccessMode: ReadWriteMany
+     Enabled: true
+     AccessMode: ReadWriteOnce
      Size: 2Gi
-     nfspath: /opt/nfs/exampleapp
-     nfsserver: 10.10.10.10
+     type: hostpath
+     path: "/tmp/data/pv-1"
+     #type: nfs
+     #nfspath: '/opt/nfs/exampleapp'
+     #nfsserver: 10.18.99.1
