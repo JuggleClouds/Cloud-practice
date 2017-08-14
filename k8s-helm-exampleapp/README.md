@@ -24,8 +24,8 @@ this example.
 - [Cluster Requirements](#cluster-requirements)
   - [Table of Contents](#table-of-contents)
   - [The application consists of two micro-services](#the-application-consists-of-two-micro-services)
-  - [What is  Helm ?](#what-is-рelm-?)
-  - [Preparation of the necessary environment for their work station](#preparation-of-the-necessary-environment-for-their-work-station)
+  - [What is  Helm ?](#what-is-helm-?)
+  - [Preparation of the necessary environment for their work station](#preparation-of-the-necessary-environment-for-their-work-stations)
   - [Deploy micro blog using make and helm](#deploy-micro-blog-using-make-and-helm)
 
 <!-- END MUNGE: GENERATED_TOC -->
