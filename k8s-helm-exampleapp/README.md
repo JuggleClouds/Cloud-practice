@@ -21,12 +21,12 @@ this example.
 
 <!-- BEGIN MUNGE: GENERATED_TOC -->
 
-- [Cluster Requirements](#Cluster-Requirements)
+- [Cluster Requirements](#cluster-requirements)
   - [Table of Contents](#table-of-contents)
-  - [The application consists of two micro-services](#The-application-consists-of-two-micro-services)
-  - [What is  Helm](#What-is-Helm)
-  - [Preparation of the necessary environment for their work station](#Preparation-of-the-necessary-environment-for-their-work-station)
-  - [Deploy micro blog using make and helm](#Deploy-micro-blog-using-make-and-helm)
+  - [The application consists of two micro-services](#the-application-consists-of-two-micro-services)
+  - [What is  Helm ?](#what-is-рelm-?)
+  - [Preparation of the necessary environment for their work station](#preparation-of-the-necessary-environment-for-their-work-station)
+  - [Deploy micro blog using make and helm](#deploy-micro-blog-using-make-and-helm)
 
 <!-- END MUNGE: GENERATED_TOC -->
 
