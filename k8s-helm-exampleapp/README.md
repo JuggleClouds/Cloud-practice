@@ -2,7 +2,35 @@
 
       This application is intended for the practical mastering of Kubernetes and Helm.
   ---
-### The application consists of two micro-services:
+
+## Cluster Requirements
+
+Kubernetes runs in a variety of environments and is inherently
+modular. Not all clusters are the same. These are the requirements for
+this example.
+
+* Minikube or Kubernetes version 1.2 is required due to using newer features, such
+  at PV Claims and Deployments. Run `kubectl version` to see your
+  cluster version.
+* [Cluster DNS](https://github.com/kubernetes/dns) will be used for service discovery.
+* Helm
+* Make
+* If you want to collect images something you need docker
+
+## Table of Contents
+
+<!-- BEGIN MUNGE: GENERATED_TOC -->
+
+- [Cluster Requirements](#Cluster-Requirements)
+  - [Table of Contents](#table-of-contents)
+  - [The application consists of two micro-services](#The-application-consists-of-two-micro-services)
+  - [What is  Helm](#What-is-Helm)
+  - [Preparation of the necessary environment for their work station](#Preparation-of-the-necessary-environment-for-their-work-station)
+  - [Deploy micro blog using make and helm](#Deploy-micro-blog-using-make-and-helm)
+
+<!-- END MUNGE: GENERATED_TOC -->
+
+## The application consists of two micro-services:
 
 What would you understand that there is no need for additional magic, for the implementation of applications in ***Kubernetes***  using ***Helm***. I took side projects for the implementation of micro services and realized with the help of their data an example.
 
