@@ -91,17 +91,15 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
 
 2. Run the minikube command from the console ``minikube start``, minikube create a virtual machine and run it kubernetes, it will add everything you need credentials to access the cluster kubernetes to a file ``~/.kube/config``.
 
-3. Then you can add auto-completion for **minikube** by the following instructions [minikube_completion](https://github.com/kubernetes/minikube/blob/master/docs/minikube_completion.md), this item can be made at will, the functionality simply installs auto-completions for **minikube**.
-
 3. Already today you can manage the cluster, using ``kubectl``, to test the health of the cluster, you can run command ``kubectl get nodes``, as a result of the command, the node should give out a node, for example ``minikube   Ready     9d`` or execute the command ``kubectl get po -n kube-system``, in the output will be all the system pods for the cluster, well and at last ``kubectl --help``, plus do not forget to use the autocompletion of commands on the button ``tab``.
 
-5. Next, you need to install Helm on your machine, just download bin files to your ``/usr/local/bin`` from here [helm](https://github.com/kubernetes/helm),For the user and ***OSX***, you can simply run command ``brew install kubernetes-helm``.
+4. Next, you need to install Helm on your machine, just download bin files to your ``/usr/local/bin`` from here [helm](https://github.com/kubernetes/helm),For the user and ***OSX***, you can simply run command ``brew install kubernetes-helm``.
 
-6. Install **Helm** server "**tiller**" in our new cluster, just run  command ``helm init``. After executing this command, you can see in the cluster what appeared under the pod **tiller** - execute the command ``kubectl get all -n kube-system`` we can see that the new "tiller" has appeared here is an example of the conclusion ``rs/tiller-deploy-3299276078``
+5. Install **Helm** server "**tiller**" in our new cluster, just run  command ``helm init``. After executing this command, you can see in the cluster what appeared under the pod **tiller** - execute the command ``kubectl get all -n kube-system`` we can see that the new "tiller" has appeared here is an example of the conclusion ``rs/tiller-deploy-3299276078``
 
-7. Copy the application itself [microblog](https://github.com/JuggleClouds/Cloud-practice/tree/master/k8s-helm-exampleapp).
+6. Copy the application itself [microblog](https://github.com/JuggleClouds/Cloud-practice/tree/master/k8s-helm-exampleapp).
 
-8. Go to directory ``./k8s-helm-exampleapp``, in file ``values.yaml`` In the section ``app`` change parameter ''externalIPs'' on ip address which displays the command ``minikube ip``.
+7. Go to directory ``./k8s-helm-exampleapp``, in file ``values.yaml`` In the section ``app`` change parameter ''externalIPs'' on ip address which displays the command ``minikube ip``.
 
  > :warning: The type of persistent volume on the minikube is only available **hostPath**. This step is optional, it is intended only for clusters kubernetes that are not deployed with the help of minikube, to connect the nfs disk with data storage for the database. Here we will configure nfs for centos, but it will not be difficult for other operating systems to find instructions on the Internet
 
