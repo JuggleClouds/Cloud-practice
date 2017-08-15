@@ -132,7 +132,9 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
 ### Deploy micro blog using make and helm
 </br>
 
-1. Install the application - go to directory ``./k8s-helm-exampleapp`` , run the command ``make run``. All variables and commands for assembling and operating the project are described in **Makefile**, a description of the commands can be viewed by running the command ``make help`` .
+In this project, to simplify the assembly of the docker images and the reversal using the helm, all commands and variables are combined in one Makefile. This is for us a mini pipeline **cd - continuous deployment**, the make is used here to avoid becoming attached to the more cumbersome **cd** systems. To see all the commands of our mini pipeline you can simply by running the command ``make help``.
+
+1. Install the application - go to directory ``./k8s-helm-exampleapp`` , run the command ``make run``.
 
 4. Check ``make status`` or ``kubectl get all -n exampleapp``.
 
