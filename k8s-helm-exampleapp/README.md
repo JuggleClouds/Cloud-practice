@@ -15,7 +15,7 @@ this example.
 * [Cluster DNS](https://github.com/kubernetes/dns) will be used for service discovery.
 * Helm
 * Make
-* If you want to collect images something you need docker
+* If you want to collect images something you need `docker`
 
 ## Table of Contents
 
@@ -74,6 +74,7 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
 ---
 
 ### Preparation of the necessary environment for their work stations
+
 </br>
 
 1. First you need to download and install minikube on your machine, just click on the link  [minikube ](https://github.com/kubernetes/minikube/releases), there are versions for all operating systems and commands for installation. Install a virtual environment in your OS, minikube requires:
