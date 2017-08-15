@@ -117,12 +117,11 @@ There are package managers apt, yum, dnf, homebrew etc, for a convenient turn of
     Add the following lines to the bottom of the file, sharing the directory with the client:  
     ```/mnt/exampleapp  *(rw,sync)``` or ```/mnt/exampleapp  "ip you nfs server"(rw,sync)```  
     These settings accomplish several tasks:
-      * To get the client node address, you need to run the command, In the result we get the following addresses ```192.168.99.100```
       * ``rw``: This option allows the client server to both read and write within the shared directory
       * ``sync``: Sync confirms requests to the shared directory only once the changes have been committed.
       * ``no_subtree_check``: This option prevents the subtree checking. When a shared directory is the subdirectory of a larger filesystem, nfs performs scans of every directory above it, in order to verify its permissions and details. Disabling the subtree check may increase the reliability of NFS, but reduce security.
       * ``no_root_squash``: This phrase allows root to connect to the designated directory   
-      > All the parameters for the NFS can be seen here [nfs options](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Deployment_Guide/s1-nfs-server-config-exports.html)
+         > All the parameters for the NFS can be seen here [nfs options](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/5/html/Deployment_Guide/s1-nfs-server-config-exports.html)
       * Once you have entered in the settings for each directory, run the following command to export them: ```exportfs -a```<p>  
  * In file ``values.yaml``  in section  ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``true``. You need to comment out the parameters ```type: hostpath```, ```path: "/tmp/data/pv-1"``` Uncomment settings ```type: nfs``` and change parameters **nfspath: /opt/exampleapp** and **nfsserver: "ip you nfs server"**  on their. If database does not need a persistent disk then in the section ``db`` -> ``Persistence`` set up parameter ``Enabled`` on ``false``.
 </br>
