@@ -36,7 +36,7 @@ What would you understand that there is no need for additional magic, for the im
 
 1. Service application  just a microblogging web application written in ***Python*** and ***Flask***, implemented to demonstrate the work with the database, works through ***uwsgi***. This application you find on [github](https://github.com/miguelgrinberg/microblog) and in my opinion the best tutorial you will find  [The Flask Mega-Tutorial, Part I: Hello, World!](https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world). I took the application from this excellent guy in an unchanged state, the second step i just added a simple authentication mechanism by name and password, because by default in the tutorial uses type authentication openid, which is not very convenient for the example.
 
-2. Database postgresql for data storage, this application uses the scheme of working with nfs disk - on deployed on your local machine or remotely. I took the implementation of creating an docker image for the database here [docker-alpine-postgres](https://github.com/kiasaki/docker-alpine-postgres).
+2. Database postgresql for data storage, this application uses the scheme of working with type of storage **hostPath** for minikube and **nfs** for a full cluster kubernetes - on deployed on your local machine or remotely. I took the implementation of creating an docker image for the database here [docker-alpine-postgres](https://github.com/kiasaki/docker-alpine-postgres).
 In this project, everything is simple and intuitive, one script ***docker-entrypoint.sh*** that initializes the database at startup
 
 **Micro services interconnection**
