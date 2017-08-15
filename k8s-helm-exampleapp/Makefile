@@ -45,7 +45,6 @@ upgrade:
 	@#@ upgrade helm projects
 	helm upgrade $(NAMECHART)  . --debug   --set app.Image=$(REPO)$(NAMEAPP),app.ImageTag=$(VERSIONAPP),db.ImageDb=$(REPO)$(NAMEDB),db.ImageTagDb=$(VERSIONDB)   --namespace $(NAMESPACE)
 
-
 status:
 	@#@ status helm projects
 	helm status $(NAMECHART)
